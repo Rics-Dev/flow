@@ -131,6 +131,17 @@ local function apply_highlights()
     
     -- Apply highlights
     for group, styles in pairs(highlights) do
+        if styles.style then
+            local style = styles.style
+            styles.style = nil
+            if type(style) == "table" then
+                for _, v in ipairs(style) do
+                    styles[v] = true
+                end
+            elseif type(style) == "string" then
+                styles[style] = true
+            end
+        end
         vim.api.nvim_set_hl(0, group, styles)
     end
     

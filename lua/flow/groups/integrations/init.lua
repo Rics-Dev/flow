@@ -20,6 +20,34 @@ function M.get(palette, options)
         integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.gitsigns").get(palette))
     end
     
+    if options.integrations.indent_blankline then
+        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.indent_blankline").get(palette))
+    end
+    
+    if options.integrations.native_lsp then
+        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.native_lsp").get(palette))
+    end
+    
+    if options.integrations.nvim_dap then
+        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.nvim_dap").get(palette))
+    end
+    
+    if options.integrations.lsp_trouble then
+        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.lsp_trouble").get(palette))
+    end
+    
+    if options.integrations.which_key then
+        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.which_key").get(palette))
+    end
+    
+    if options.integrations.bufferline then
+        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.bufferline").get(palette))
+    end
+    
+    if options.integrations.notify then
+        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.notify").get(palette))
+    end
+    
     return integrations
 end
 

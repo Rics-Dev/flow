@@ -33,6 +33,7 @@ M.palette = {
     yellow = "#e5c07b",
     bright_yellow = "#ebc275",
     gold = "#d19a66",
+    bright_gold = "#e6b673",
     cyan = "#56b6c2",
     bright_cyan = "#4dbdcb",
     gray = "#3e4452",
@@ -53,6 +54,21 @@ M.palette = {
     warning = "#e5c07b",
     info = "#5ab0f6",
     hint = "#abb2bf",
+    -- Enhanced LSP colors
+    lsp_inlay_hint = "#4a5363",
+    lsp_ref_text = "#2d3440",
+    lsp_ref_write = "#3b2f42",
+    lsp_ref_read = "#2e3c44",
+    -- Enriched syntax colors
+    identifier = "#abb2bf",
+    parameter = "#d7dae0",
+    method = "#61afef",
+    special_method = "#5ab0f6",
+    keyword_control = "#c678dd",
+    -- Improved visibility
+    indent_guide = "#1e242e",
+    indent_guide_active = "#3e4452",
+    indent_blank = "#21252f",
 }
 
 return M

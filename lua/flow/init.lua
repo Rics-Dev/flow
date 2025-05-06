@@ -1,14 +1,14 @@
 local M = {}
 local palette = require("flow.palettes").palette
 
--- Default options
+-- Enhanced default options
 M.options = {
     transparent_background = false,
-    term_colors = false,
+    term_colors = true,  
     styles = {
         comments = { "italic" },
         conditionals = { "italic" },
-        loops = {},
+        loops = { "italic" },  
         functions = {},
         keywords = { "bold" },
         strings = {},
@@ -18,6 +18,7 @@ M.options = {
         properties = {},
         types = { "bold" },
         operators = {},
+        parameters = { "italic" },  
     },
     integrations = {
         cmp = true,
@@ -25,21 +26,44 @@ M.options = {
         nvimtree = true,
         telescope = true,
         treesitter = true,
+        indent_blankline = true,  
+        native_lsp = true,        
+        nvim_dap = true,          
+        lsp_trouble = true,       
+        which_key = true,         
+        bufferline = true,        
+        illuminate = true,        
+        notify = true,            
+    },
+    features = {
+        illuminate = {
+            enabled = true,
+            background_only = false,
+        },
+        dim_inactive = {
+            enabled = false,
+            percentage = 0.15,
+        },
+        indent_guides = {
+            enabled = true,
+            colored_indent_levels = false,
+        },
     },
 }
 
--- Setup function
+-- Setup function with more options
 function M.setup(options)
     M.options = vim.tbl_deep_extend("force", M.options, options or {})
 end
 
--- Apply highlight groups
+-- Apply highlight groups with enhanced functionality
 local function apply_highlights()
     local highlights = {
-        -- Editor
+        -- Editor - Enhanced with more specific highlight groups
         Normal = { fg = palette.bright_foreground, bg = palette.background },
         NormalFloat = { fg = palette.bright_foreground, bg = palette.element_bg },
         FloatBorder = { fg = palette.border, bg = palette.element_bg },
+        FloatTitle = { fg = palette.bright_blue, bold = true },
         Cursor = { fg = palette.background, bg = palette.bright_foreground },
         CursorLine = { bg = palette.cursorline },
         CursorLineNr = { fg = palette.bright_foreground, bold = true },
@@ -47,10 +71,12 @@ local function apply_highlights()
         SignColumn = { bg = palette.background },
         ColorColumn = { bg = palette.cursorline },
         VertSplit = { fg = palette.border },
+        WinSeparator = { fg = palette.border },  -- Added for newer Neovim
         Visual = { bg = palette.highlight_bg },
         VisualNOS = { bg = palette.highlight_bg },
         Search = { fg = palette.background, bg = palette.bright_blue },
         IncSearch = { fg = palette.background, bg = palette.bright_yellow },
+        CurSearch = { fg = palette.background, bg = palette.bright_purple }, -- Added for current search
         Pmenu = { fg = palette.bright_foreground, bg = palette.element_bg },
         PmenuSel = { fg = palette.bright_foreground, bg = palette.element_active, bold = true },
         PmenuSbar = { bg = palette.element_bg },
@@ -58,6 +84,8 @@ local function apply_highlights()
         StatusLine = { fg = palette.bright_foreground, bg = palette.element_bg },
         StatusLineNC = { fg = palette.light_gray, bg = palette.element_bg },
         WildMenu = { fg = palette.bright_foreground, bg = palette.element_active },
+        WinBar = { fg = palette.bright_foreground, bg = palette.background }, -- Added WinBar
+        WinBarNC = { fg = palette.light_gray, bg = palette.background },      -- Added WinBarNC
         TabLine = { fg = palette.light_gray, bg = palette.element_bg },
         TabLineFill = { bg = palette.element_bg },
         TabLineSel = { fg = palette.bright_foreground, bg = palette.element_active },
@@ -70,7 +98,7 @@ local function apply_highlights()
         FoldColumn = { fg = palette.light_gray, bg = palette.background },
         EndOfBuffer = { fg = palette.gray },
         
-        -- Syntax
+        -- Syntax - Enhanced with more specific token types
         Comment = { fg = palette.light_gray, style = M.options.styles.comments },
         Constant = { fg = palette.yellow, bold = true },
         String = { fg = palette.green },
@@ -78,7 +106,7 @@ local function apply_highlights()
         Number = { fg = palette.yellow },
         Boolean = { fg = palette.yellow },
         Float = { fg = palette.yellow },
-        Identifier = { fg = palette.bright_foreground },
+        Identifier = { fg = palette.identifier },
         Function = { fg = palette.blue },
         Statement = { fg = palette.purple, bold = true },
         Conditional = { fg = palette.purple, style = M.options.styles.conditionals },
@@ -106,13 +134,13 @@ local function apply_highlights()
         Error = { fg = palette.error },
         Todo = { fg = palette.purple, bold = true },
         
-        -- Diff
+        -- Diff - Enhanced with better visibility
         DiffAdd = { bg = palette.diff_add },
         DiffChange = { bg = palette.diff_change },
         DiffDelete = { bg = palette.diff_delete },
         DiffText = { bg = palette.diff_text },
         
-        -- Diagnostics
+        -- Diagnostics - Enhanced with more detailed diagnostics
         DiagnosticError = { fg = palette.error },
         DiagnosticWarn = { fg = palette.warning },
         DiagnosticInfo = { fg = palette.info },
@@ -121,6 +149,47 @@ local function apply_highlights()
         DiagnosticUnderlineWarn = { undercurl = true, sp = palette.warning },
         DiagnosticUnderlineInfo = { undercurl = true, sp = palette.info },
         DiagnosticUnderlineHint = { undercurl = true, sp = palette.hint },
+        DiagnosticFloatingError = { fg = palette.error, bg = palette.element_bg },
+        DiagnosticFloatingWarn = { fg = palette.warning, bg = palette.element_bg },
+        DiagnosticFloatingInfo = { fg = palette.info, bg = palette.element_bg },
+        DiagnosticFloatingHint = { fg = palette.hint, bg = palette.element_bg },
+        DiagnosticSignError = { fg = palette.error },
+        DiagnosticSignWarn = { fg = palette.warning },
+        DiagnosticSignInfo = { fg = palette.info },
+        DiagnosticSignHint = { fg = palette.hint },
+        DiagnosticVirtualTextError = { fg = palette.error, bg = "#2a1c1f" },
+        DiagnosticVirtualTextWarn = { fg = palette.warning, bg = "#2a261c" },
+        DiagnosticVirtualTextInfo = { fg = palette.info, bg = "#1c242a" },
+        DiagnosticVirtualTextHint = { fg = palette.hint, bg = "#1c2026" },
+        
+        -- LSP - Added detailed LSP highlight groups
+        LspReferenceText = { bg = palette.lsp_ref_text },
+        LspReferenceRead = { bg = palette.lsp_ref_read },
+        LspReferenceWrite = { bg = palette.lsp_ref_write },
+        LspSignatureActiveParameter = { fg = palette.bright_yellow, bold = true, italic = true },
+        LspCodeLens = { fg = palette.light_gray, italic = true },
+        LspInlayHint = { fg = palette.light_gray, bg = palette.lsp_inlay_hint, italic = true },
+        
+        -- Indent-Blankline - Added support for indent guides
+        IndentBlanklineChar = { fg = palette.indent_guide },
+        IndentBlanklineContextChar = { fg = palette.indent_guide_active },
+        IblIndent = { fg = palette.indent_guide },  -- For newer versions
+        IblScope = { fg = palette.indent_guide_active },  -- For newer versions
+        
+        -- Illuminate - Added support for word highlighting
+        IlluminatedWordText = { bg = palette.lsp_ref_text },
+        IlluminatedWordRead = { bg = palette.lsp_ref_read },
+        IlluminatedWordWrite = { bg = palette.lsp_ref_write },
+        
+        -- Specific TreeSitter customizations
+        Parameter = { fg = palette.parameter, style = M.options.styles.parameters },
+        Method = { fg = palette.method },
+        MethodCall = { fg = palette.method },
+        KeywordControl = { fg = palette.keyword_control, bold = true },
+        
+        -- Neovim Terminal Colors - Better consistency
+        TermCursor = { bg = palette.bright_foreground },
+        TermCursorNC = { bg = palette.light_gray },
     }
     
     -- Load plugin integrations
@@ -129,7 +198,7 @@ local function apply_highlights()
         highlights = vim.tbl_deep_extend("force", highlights, integration_highlights)
     end
     
-    -- Apply highlights
+    -- Apply highlights with style processing
     for group, styles in pairs(highlights) do
         if styles.style then
             local style = styles.style
@@ -145,7 +214,7 @@ local function apply_highlights()
         vim.api.nvim_set_hl(0, group, styles)
     end
     
-    -- Terminal colors
+    -- Apply terminal colors
     if M.options.term_colors then
         vim.g.terminal_color_0 = palette.black
         vim.g.terminal_color_1 = palette.red
@@ -166,21 +235,13 @@ local function apply_highlights()
     end
 end
 
--- Load the colorscheme
 function M.load()
-    -- Clear existing highlights
     vim.cmd("hi clear")
     if vim.fn.exists("syntax_on") then
         vim.cmd("syntax reset")
     end
-    
-    -- Set colorscheme name
     vim.g.colors_name = "flow"
-    
-    -- Set options
     vim.o.termguicolors = true
-    
-    -- Apply highlights
     apply_highlights()
 end
 

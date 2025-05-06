@@ -1,7 +1,6 @@
 local M = {}
 local palette = require("flow.palettes").palette
 
--- Enhanced default options
 M.options = {
     transparent_background = false,
     term_colors = true,  

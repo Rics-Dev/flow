@@ -2,23 +2,44 @@ local M = {}
 
 function M.get(palette)
     return {
+        -- Base bufferline components
         BufferLineFill = { bg = palette.background },
         BufferLineBackground = { fg = palette.light_gray, bg = palette.element_bg },
         BufferLineBufferVisible = { fg = palette.light_gray, bg = palette.element_bg },
-        BufferLineBufferSelected = { fg = palette.bright_foreground, bg = palette.element_active, bold = true },
+        BufferLineBufferSelected = { 
+            fg = palette.bright_foreground, 
+            bg = palette.element_active, 
+            bold = true,
+            italic = false -- Prevent italic rendering issues with some fonts
+        },
+        
+        -- Tab styling
         BufferLineTab = { fg = palette.light_gray, bg = palette.element_bg },
         BufferLineTabSelected = { fg = palette.bright_foreground, bg = palette.element_active },
         BufferLineTabClose = { fg = palette.bright_red, bg = palette.element_bg },
+        
+        -- Indicators and separators
         BufferLineIndicatorSelected = { fg = palette.bright_blue, bg = palette.element_active },
-        -- Modified buffers
+        BufferLineSeparator = { fg = palette.border, bg = palette.element_bg },
+        BufferLineSeparatorSelected = { fg = palette.border_focused, bg = palette.element_active },
+        BufferLineSeparatorVisible = { fg = palette.border, bg = palette.element_bg },
+        
+        -- Improved icon support
+        BufferLineDevIconDefault = { fg = palette.bright_foreground, bg = palette.element_bg },
+        BufferLineDevIconDefaultSelected = { fg = palette.bright_foreground, bg = palette.element_active },
+        BufferLineDevIconDefaultInactive = { fg = palette.light_gray, bg = palette.element_bg },
+        
+        -- Modified buffers with improved visibility
         BufferLineModified = { fg = palette.bright_yellow, bg = palette.element_bg },
         BufferLineModifiedVisible = { fg = palette.bright_yellow, bg = palette.element_bg },
         BufferLineModifiedSelected = { fg = palette.bright_yellow, bg = palette.element_active },
-        -- Diagnostics
+        
+        -- Diagnostics with better contrast
         BufferLineDiagnostic = { fg = palette.light_gray, bg = palette.element_bg },
         BufferLineDiagnosticVisible = { fg = palette.light_gray, bg = palette.element_bg },
-        BufferLineDiagnosticSelected = { fg = palette.light_gray, bg = palette.element_active },
-        -- Errors
+        BufferLineDiagnosticSelected = { fg = palette.bright_foreground, bg = palette.element_active },
+        
+        -- Errors with higher visibility
         BufferLineError = { fg = palette.error, bg = palette.element_bg },
         BufferLineErrorVisible = { fg = palette.error, bg = palette.element_bg },
         BufferLineErrorSelected = { fg = palette.error, bg = palette.element_active },
@@ -49,6 +70,11 @@ function M.get(palette)
         BufferLineHintDiagnostic = { fg = palette.hint, bg = palette.element_bg },
         BufferLineHintDiagnosticVisible = { fg = palette.hint, bg = palette.element_bg },
         BufferLineHintDiagnosticSelected = { fg = palette.hint, bg = palette.element_active },
+        
+        -- Pick mode
+        BufferLinePickSelected = { fg = palette.background, bg = palette.bright_blue, bold = true },
+        BufferLinePickVisible = { fg = palette.background, bg = palette.blue, bold = true },
+        BufferLinePick = { fg = palette.background, bg = palette.blue, bold = true },
     }
 end
 

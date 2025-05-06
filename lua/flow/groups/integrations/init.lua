@@ -40,9 +40,9 @@ function M.get(palette, options)
         integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.which_key").get(palette))
     end
     
-    if options.integrations.bufferline then
-        integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.bufferline").get(palette))
-    end
+    -- if options.integrations.bufferline then
+    --     integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.bufferline").get(palette))
+    -- end
     
     if options.integrations.notify then
         integrations = vim.tbl_deep_extend("force", integrations, require("flow.groups.integrations.notify").get(palette))

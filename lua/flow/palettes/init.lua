@@ -1,13 +1,13 @@
 local M = {}
 
 M.palette = {
+    -- Base colors
     background = "#0F1219",
     foreground = "#abb2bf",
     bright_foreground = "#d7dae0",
     muted_foreground = "#b0b8c5",
     placeholder = "#697082",
     disabled = "#495162",
-    
     -- UI element backgrounds
     surface = "#0F1219",
     element_bg = "#262c38",
@@ -17,12 +17,10 @@ M.palette = {
     highlight_bg = "#3b4559",
     cursorline = "#161a24",
     highlighted_line = "#1e242e",
-    
     -- Borders
     border = "#1e242e",
     border_focused = "#3b4559",
     border_selected = "#3b4559",
-    
     -- Syntax colors
     blue = "#61afef",
     bright_blue = "#5ab0f6",
@@ -39,7 +37,6 @@ M.palette = {
     bright_cyan = "#4dbdcb",
     gray = "#3e4452",
     light_gray = "#697082",
-    
     -- Terminal colors
     black = "#3f4451",
     bright_black = "#4f5666",
@@ -47,7 +44,6 @@ M.palette = {
     white = "#d7dae0",
     bright_white = "#e6e6e6",
     dim_white = "#abb2bf",
-    
     -- Special colors
     diff_add = "#3b5135",
     diff_change = "#4e3e30",

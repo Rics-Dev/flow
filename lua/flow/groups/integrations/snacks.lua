@@ -14,6 +14,15 @@ function M.get(palette)
         SnackError = { fg = palette.background, bg = palette.red },
         SnackErrorIcon = { fg = palette.background, bg = palette.red, bold = true },
         SnackBorder = { fg = palette.border, bg = palette.element_bg },
+        
+        SnackPickerNormal = { fg = palette.bright_foreground, bg = palette.background },
+        SnackPickerBorder = { fg = palette.border, bg = palette.background },
+        SnackPickerTitle = { fg = palette.bright_blue, bold = true, bg = palette.background },
+        SnackPickerHeader = { fg = palette.bright_foreground, bg = palette.background },
+        SnackPickerFooter = { fg = palette.light_gray, bg = palette.background },
+        SnackPickerSelection = { fg = palette.bright_foreground, bg = palette.element_selected },
+        SnackPickerMatching = { fg = palette.bright_blue, bold = true },
+        SnackPickerCursor = { fg = palette.bright_blue },
     }
 end
 

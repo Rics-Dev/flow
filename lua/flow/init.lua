@@ -67,15 +67,15 @@ local function apply_highlights()
         FloatBorder = { fg = palette.border, bg = palette.element_bg },
         FloatTitle = { fg = palette.bright_blue, bold = true },
         Cursor = { fg = palette.background, bg = palette.bright_foreground },
-        CursorLine = { bg = palette.element_hover },
+        CursorLine = { fg = palette.bright_foreground, bg = palette.element_hover },
         CursorLineNr = { fg = palette.bright_foreground, bold = true },
         LineNr = { fg = palette.light_gray },
         SignColumn = { bg = palette.background },
         ColorColumn = { bg = palette.element_hover },
         VertSplit = { fg = palette.border },
         WinSeparator = { fg = palette.border },  -- Added for newer Neovim
-        Visual = { bg = palette.selection_bg },
-        VisualNOS = { bg = palette.selection_bg },
+        Visual = { fg = palette.selection_fg, bg = palette.selection_bg },
+        VisualNOS = { fg = palette.selection_fg, bg = palette.selection_bg },
         Search = { fg = palette.background, bg = palette.bright_blue },
         IncSearch = { fg = palette.background, bg = palette.bright_yellow },
         CurSearch = { fg = palette.background, bg = palette.bright_purple }, -- Added for current search

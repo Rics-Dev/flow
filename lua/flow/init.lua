@@ -3,7 +3,7 @@ local palette = require("flow.palettes").palette
 
 M.options = {
     transparent_background = false,
-    term_colors = true,  
+    term_colors = true,
     styles = {
         comments = { "italic" },
         conditionals = { "italic" },
@@ -67,7 +67,8 @@ local function apply_highlights()
         FloatBorder = { fg = palette.border, bg = palette.element_bg },
         FloatTitle = { fg = palette.bright_blue, bold = true },
         Cursor = { fg = palette.background, bg = palette.bright_foreground },
-        CursorLine = { fg = palette.bright_foreground, bg = palette.element_hover },
+        -- CursorLine = { fg = palette.bright_foreground, bg = palette.element_hover },
+        CursorLine = {},
         CursorLineNr = { fg = palette.bright_foreground, bold = true },
         LineNr = { fg = palette.light_gray },
         SignColumn = { bg = palette.background },

@@ -13,7 +13,8 @@ M.palette = {
     -- UI elements
     border             = "#1e242e",
     border_focused     = "#3b4559",
-    element_bg         = "#262c38",
+    -- element_bg         = "#262c38",
+    element_bg         = "#0F1219",
     element_hover      = "#1e242e",
     element_active     = "#2c313a",
     element_selected   = "#2c313a",

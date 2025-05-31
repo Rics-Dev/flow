@@ -60,9 +60,18 @@ end
 
 -- Apply highlight groups with enhanced functionality
 local function apply_highlights()
-    -- Determine background values based on transparency setting
-    local normal_bg = M.options.transparent_background and nil or palette.background
-    local float_bg = M.options.transparent_background and nil or palette.background_dark
+    local normal_bg = M.options.transparent_background and "NONE" or palette.background
+    local float_bg = M.options.transparent_background and "NONE" or palette.background_dark
+    local sign_bg = M.options.transparent_background and "NONE" or palette.background
+    local statusline_bg = M.options.transparent_background and "NONE" or palette.background_dark
+    local winbar_bg = M.options.transparent_background and "NONE" or palette.background
+    local tabline_bg = M.options.transparent_background and "NONE" or palette.background_dark
+    local tabfill_bg = M.options.transparent_background and "NONE" or palette.background
+    local folded_bg = M.options.transparent_background and "NONE" or palette.background_lighter
+    local colorcolumn_bg = M.options.transparent_background and "NONE" or palette.background_lighter
+    local pmenu_bg = M.options.transparent_background and "NONE" or palette.background_dark
+    local pmenu_sbar_bg = M.options.transparent_background and "NONE" or palette.background_darker
+    
     local highlights = {
         -- Editor - Properly handle backgrounds based on transparency setting
         Normal = { fg = palette.bright_foreground, bg = normal_bg },
@@ -72,9 +81,9 @@ local function apply_highlights()
         Cursor = { fg = palette.background, bg = palette.bright_foreground },
         CursorLine = {}, -- Disabled to prevent line highlight
         CursorLineNr = {}, -- Disabled to prevent line number highlight
-        LineNr = { fg = palette.light_gray, bg = normal_bg },
-        SignColumn = { bg = normal_bg },
-        ColorColumn = { bg = M.options.transparent_background and nil or palette.background_lighter },
+        LineNr = { fg = palette.light_gray, bg = sign_bg },
+        SignColumn = { bg = sign_bg },
+        ColorColumn = { bg = colorcolumn_bg },
         VertSplit = { fg = palette.border, bg = normal_bg },
         WinSeparator = { fg = palette.border, bg = normal_bg },
         Visual = { fg = palette.selection_fg, bg = palette.selection_bg },
@@ -82,25 +91,25 @@ local function apply_highlights()
         Search = { fg = palette.background, bg = palette.bright_blue },
         IncSearch = { fg = palette.background, bg = palette.bright_yellow },
         CurSearch = { fg = palette.background, bg = palette.bright_purple },
-        Pmenu = { fg = palette.bright_foreground, bg = M.options.transparent_background and nil or palette.background_dark },
+        Pmenu = { fg = palette.bright_foreground, bg = pmenu_bg },
         PmenuSel = { fg = palette.bright_foreground, bg = palette.element_active, bold = true },
-        PmenuSbar = { bg = M.options.transparent_background and nil or palette.background_darker },
+        PmenuSbar = { bg = pmenu_sbar_bg },
         PmenuThumb = { bg = palette.gray },
-        StatusLine = { fg = palette.bright_foreground, bg = M.options.transparent_background and nil or palette.background_dark },
-        StatusLineNC = { fg = palette.light_gray, bg = M.options.transparent_background and nil or palette.background },
+        StatusLine = { fg = palette.bright_foreground, bg = statusline_bg },
+        StatusLineNC = { fg = palette.light_gray, bg = normal_bg },
         WildMenu = { fg = palette.bright_foreground, bg = palette.element_active },
-        WinBar = { fg = palette.bright_foreground, bg = normal_bg },
-        WinBarNC = { fg = palette.light_gray, bg = normal_bg },
-        TabLine = { fg = palette.light_gray, bg = M.options.transparent_background and nil or palette.background_dark },
-        TabLineFill = { bg = M.options.transparent_background and nil or palette.background },
+        WinBar = { fg = palette.bright_foreground, bg = winbar_bg },
+        WinBarNC = { fg = palette.light_gray, bg = winbar_bg },
+        TabLine = { fg = palette.light_gray, bg = tabline_bg },
+        TabLineFill = { bg = tabfill_bg },
         TabLineSel = { fg = palette.bright_foreground, bg = palette.element_active },
         Title = { fg = palette.bright_blue, bold = true },
         Directory = { fg = palette.blue },
         MatchParen = { fg = palette.bright_blue, underline = true },
         NonText = { fg = palette.gray },
         SpecialKey = { fg = palette.gray },
-        Folded = { fg = palette.light_gray, bg = M.options.transparent_background and nil or palette.background_lighter },
-        FoldColumn = { fg = palette.light_gray, bg = normal_bg },
+        Folded = { fg = palette.light_gray, bg = folded_bg },
+        FoldColumn = { fg = palette.light_gray, bg = sign_bg },
         EndOfBuffer = { fg = palette.gray },
 
         -- Syntax - Enhanced with more specific token types
@@ -143,7 +152,7 @@ local function apply_highlights()
         DiffChange = { bg = palette.diff_change },
         DiffDelete = { bg = palette.diff_delete },
         DiffText = { bg = palette.diff_text },
-        -- Diagnostics - Set backgrounds to nil for transparency
+        -- Diagnostics - Set backgrounds to NONE for transparency
         DiagnosticError = { fg = palette.error },
         DiagnosticWarn = { fg = palette.warning },
         DiagnosticInfo = { fg = palette.info },
@@ -152,53 +161,58 @@ local function apply_highlights()
         DiagnosticUnderlineWarn = { undercurl = true, sp = palette.warning },
         DiagnosticUnderlineInfo = { undercurl = true, sp = palette.info },
         DiagnosticUnderlineHint = { undercurl = true, sp = palette.hint },
-        DiagnosticFloatingError = { fg = palette.error, bg = nil },
-        DiagnosticFloatingWarn = { fg = palette.warning, bg = nil },
-        DiagnosticFloatingInfo = { fg = palette.info, bg = nil },
-        DiagnosticFloatingHint = { fg = palette.hint, bg = nil },
-        DiagnosticSignError = { fg = palette.error },
-        DiagnosticSignWarn = { fg = palette.warning },
-        DiagnosticSignInfo = { fg = palette.info },
-        DiagnosticSignHint = { fg = palette.hint },
-        DiagnosticVirtualTextError = { fg = palette.error, bg = nil },
-        DiagnosticVirtualTextWarn = { fg = palette.warning, bg = nil },
-        DiagnosticVirtualTextInfo = { fg = palette.info, bg = nil },
-        DiagnosticVirtualTextHint = { fg = palette.hint, bg = nil },
-        -- LSP - Set backgrounds to nil for transparency
-        LspReferenceText = { bg = nil },
-        LspReferenceRead = { bg = nil },
-        LspReferenceWrite = { bg = nil },
+        DiagnosticFloatingError = { fg = palette.error, bg = "NONE" },
+        DiagnosticFloatingWarn = { fg = palette.warning, bg = "NONE" },
+        DiagnosticFloatingInfo = { fg = palette.info, bg = "NONE" },
+        DiagnosticFloatingHint = { fg = palette.hint, bg = "NONE" },
+        DiagnosticSignError = { fg = palette.error, bg = sign_bg },
+        DiagnosticSignWarn = { fg = palette.warning, bg = sign_bg },
+        DiagnosticSignInfo = { fg = palette.info, bg = sign_bg },
+        DiagnosticSignHint = { fg = palette.hint, bg = sign_bg },
+        DiagnosticVirtualTextError = { fg = palette.error, bg = "NONE" },
+        DiagnosticVirtualTextWarn = { fg = palette.warning, bg = "NONE" },
+        DiagnosticVirtualTextInfo = { fg = palette.info, bg = "NONE" },
+        DiagnosticVirtualTextHint = { fg = palette.hint, bg = "NONE" },
+        -- LSP - Set backgrounds to NONE for transparency
+        LspReferenceText = { bg = "NONE" },
+        LspReferenceRead = { bg = "NONE" },
+        LspReferenceWrite = { bg = "NONE" },
         LspSignatureActiveParameter = { fg = palette.bright_yellow, bold = true, italic = true },
         LspCodeLens = { fg = palette.light_gray, italic = true },
-        LspInlayHint = { fg = palette.light_gray, bg = nil, italic = true },
+        LspInlayHint = { fg = palette.light_gray, bg = "NONE", italic = true },
         -- Indent-Blankline - Added support for indent guides
         IndentBlanklineChar = { fg = palette.indent_guide },
         IndentBlanklineContextChar = { fg = palette.indent_guide_active },
         IblIndent = { fg = palette.indent_guide },
         IblScope = { fg = palette.indent_guide_active },
-        -- Illuminate - Set backgrounds to nil for transparency
-        IlluminatedWordText = { bg = nil },
-        IlluminatedWordRead = { bg = nil },
-        IlluminatedWordWrite = { bg = nil },
-        
+        -- Illuminate - Set backgrounds to NONE for transparency
+        IlluminatedWordText = { bg = "NONE" },
+        IlluminatedWordRead = { bg = "NONE" },
+        IlluminatedWordWrite = { bg = "NONE" },
         -- Specific TreeSitter customizations
         Parameter = { fg = palette.parameter, style = M.options.styles.parameters },
         Method = { fg = palette.method },
         MethodCall = { fg = palette.method },
         KeywordControl = { fg = palette.keyword_control, bold = true },
-        
-        -- Neovim Terminal Colors - Better consistency
+        -- Terminal Colors - Make terminals more distinguishable
         TermCursor = { bg = palette.bright_foreground },
         TermCursorNC = { bg = palette.light_gray },
+        -- Terminal window background - darker than normal background
+        Terminal = { 
+            fg = palette.bright_foreground, 
+            bg = M.options.transparent_background and "NONE" or palette.background_darker 
+        },
     }
 
     -- Load plugin integrations
     if M.options.integrations then
         local integration_highlights = require("flow.groups.integrations").get(palette, M.options)
-        -- Ensure plugin backgrounds are transparent
+        -- Ensure plugin backgrounds respect transparency
         if M.options.transparent_background then
             for group, styles in pairs(integration_highlights) do
-                styles.bg = nil
+                if styles.bg and styles.bg ~= "NONE" then
+                    styles.bg = "NONE"
+                end
             end
         end
         highlights = vim.tbl_deep_extend("force", highlights, integration_highlights)
@@ -209,7 +223,7 @@ local function apply_highlights()
         local dim_percentage = M.options.features.dim_inactive.percentage or 0.15
         highlights.NormalNC = { 
             fg = palette.muted_foreground,
-            bg = M.options.transparent_background and nil or palette.background,
+            bg = M.options.transparent_background and "NONE" or palette.background,
         }
     end
     

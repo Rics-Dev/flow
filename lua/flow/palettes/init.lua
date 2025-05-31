@@ -1,5 +1,4 @@
 local M = {}
-
 M.palette = {
     -- Base colors
     background         = "#0F1219",
@@ -9,7 +8,6 @@ M.palette = {
     cursor_text        = "#0F1219",
     selection_bg       = "#3b4559",
     selection_fg       = "#d7dae0",
-
     -- UI elements
     border             = "#23283a",
     border_focused     = "#495162",
@@ -19,7 +17,6 @@ M.palette = {
     element_selected   = "#2c313a",
     element_disabled   = "#161a24",
     popup_bg           = "#0F1219",
-
     -- Gutter, line numbers, etc.
     light_gray         = "#697082",
     muted_foreground   = "#697082",
@@ -29,13 +26,11 @@ M.palette = {
     identifier         = "#abb2bf",
     method             = "#61afef",
     keyword_control    = "#c678dd",
-
     -- Diff colors
     diff_add           = "#3b5135",
     diff_change        = "#4e3e30",
     diff_delete        = "#572a32",
     diff_text          = "#293b4d",
-
     -- LSP/diagnostics
     error              = "#ff4757",
     warning            = "#e5c07b",
@@ -45,13 +40,11 @@ M.palette = {
     lsp_ref_read       = "#293b4d",
     lsp_ref_write      = "#3b2d4e",
     lsp_inlay_hint     = "#262c38",
-
     -- Indent guides
     indent_guide       = "#1e242e",
     indent_guide_active= "#3e4452",
-
-    -- Terminal colors (normal)
-    black              = "#3f4451",
+    -- Terminal colors (normal) - Made darker
+    black              = "#1a1f2b",  -- Darker from #3f4451
     red                = "#e06c75",
     green              = "#98c379",
     yellow             = "#e5c07b",
@@ -59,9 +52,8 @@ M.palette = {
     purple             = "#c678dd",
     cyan               = "#56b6c2",
     white              = "#d7dae0",
-
-    -- Terminal colors (bright)
-    bright_black       = "#4f5666",
+    -- Terminal colors (bright) - Made darker
+    bright_black       = "#2a2f3c",  -- Darker from #4f5666
     bright_red         = "#ff616e",
     bright_green       = "#a5e075",
     bright_yellow      = "#ebc275",
@@ -69,9 +61,8 @@ M.palette = {
     bright_purple      = "#de73ff",
     bright_cyan        = "#4dbdcb",
     bright_white       = "#e6e6e6",
-
     -- Extra (dim, gold, etc.)
-    dim_black          = "#2e333d",
+    dim_black          = "#0f1419",  -- Made even darker from #2e333d
     dim_red            = "#c84a56",
     dim_green          = "#7ea560",
     dim_yellow         = "#c9a662",
@@ -82,5 +73,4 @@ M.palette = {
     gold               = "#d19a66",
     red_alt            = "#ff4757",
 }
-
 return M
